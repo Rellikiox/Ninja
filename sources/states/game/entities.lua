@@ -10,6 +10,7 @@ local id = 0
 function ents:load()
 	register["player"] = love.filesystem.load( ents.objpath .. "player.lua" )
 	register["shuriken"] = love.filesystem.load( ents.objpath .. "shuriken.lua" )
+	register["ghost"] = love.filesystem.load( ents.objpath .. "ghost.lua" )
 end
 
 function ents:derive(name)
@@ -56,6 +57,23 @@ function ents:draw()
 	for i, ent in ipairs(ents.drawingList) do
 		ent:draw()
 	end
+end
+
+function ents:getEntity( id )
+	if (id <= #self.objectsList) then
+		return ents.objectsList[id]
+	end
+	return nil
+end
+
+function ents:getEntities( name )
+	name_ents = {}
+	for i, ent in pairs(ents.objectsList) do
+		if ent.type == name then
+			table.insert(name_ents, ent)
+		end
+	end
+	return name_ents
 end
 
 return ents

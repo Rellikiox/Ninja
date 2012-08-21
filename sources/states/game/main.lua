@@ -1,12 +1,13 @@
-TLbind,control = love.filesystem.load("libs/TLbind.lua")()
-require("libs/SICK")
-require("libs/anal")
-require("libs/TEsound")
+
 
 last_update = love.timer.getMicroTime()
 prev_fram = 0
 fps = 9001
 function load()
+	TLbind,control = love.filesystem.load("libs/TLbind.lua")()
+	require("libs/SICK")
+	require("libs/anal")
+	require("libs/TEsound")
 	require("states/game/entities")
 	require("states/game/entities/snow")
 	
@@ -14,6 +15,8 @@ function load()
 	ents:add( "player", 400, 300 )	
 	
 	fsharp = love.graphics.newImage("textures/fsharpposter.png")
+	moon = love.graphics.newImage("textures/moon.png")
+	house = love.graphics.newImage("textures/silhouette.png")
 	
 	textures = {
 		[0] = love.graphics.newImage("textures/flake_01.png"),
@@ -22,14 +25,16 @@ function load()
 		[3] = love.graphics.newImage("textures/flake_04.png"),
 	}
 	snow:load(0, 0, 800, 300, 100, textures)
+	
+	ents:add( "ghost", 100, 300 )
 end
 
 function love.draw()
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.line(0,300,800,300)
+	love.graphics.setColor(255, 255, 255)
 	--love.graphics.print(fps, 20, 20)
-	love.graphics.setColor(255, 0, 0)
-	love.graphics.rectangle("fill", 100, 300, 1, 1)
+	
+	love.graphics.draw(moon, 40, 10)
+	love.graphics.draw(house, 600, 220)
 	
 	snow:drawBG()
 	
@@ -38,6 +43,11 @@ function love.draw()
 	ents:draw()
 	
 	snow:drawFG()
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.line(0,300,800,300)
+	love.graphics.setColor(0, 0, 0)
+	love.graphics.rectangle("fill", 0, 300, 800, 300)
+	
 end
 
 function love.update(dt)
