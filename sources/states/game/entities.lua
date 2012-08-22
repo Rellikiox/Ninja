@@ -11,6 +11,7 @@ function ents:load()
 	register["player"] = love.filesystem.load( ents.objpath .. "player.lua" )
 	register["shuriken"] = love.filesystem.load( ents.objpath .. "shuriken.lua" )
 	register["ghost"] = love.filesystem.load( ents.objpath .. "ghost.lua" )
+	register["moon"] = love.filesystem.load( ents.objpath .. "moon.lua" )
 end
 
 function ents:derive(name)

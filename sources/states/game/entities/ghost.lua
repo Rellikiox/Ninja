@@ -3,7 +3,6 @@ local ent = ents:derive("base")
 local ghost_cooldown = 3
 
 function ent:load( x, y, dir )
-	require("states/game/entities")
 	self:setPos(x, y, 1)
 	self.start_y = y
 	self.velocity = 0

@@ -15,7 +15,8 @@ function ent:load( x, y )
 	-- Sounds
 	self.sounds = {
 		hit = "sounds/hit.wav",
-		jump = "sounds/jump.wav"
+		jump = "sounds/jump.wav",
+		throw = "sounds/pew.wav"
 	}
 	
 	-- Animation
@@ -35,7 +36,7 @@ function ent:load( x, y )
 						3, 
 						0),
 					x = 0,
-					y = 41
+					y = 42
 				},
 				[-1] = {
 					anim = newAnimation(
@@ -45,7 +46,7 @@ function ent:load( x, y )
 						3, 
 						0),
 					x = 0,
-					y = 41
+					y = 42
 				}
 			},
 			["run"] = {
@@ -57,7 +58,7 @@ function ent:load( x, y )
 						0.2, 
 						0),
 					x = 0,
-					y = 41
+					y = 42
 				},
 				[-1] = {
 					anim = newAnimation(
@@ -67,7 +68,7 @@ function ent:load( x, y )
 						0.2, 
 						0),
 					x = 0,
-					y = 41
+					y = 42
 				}
 			},
 			["jump"] = {
@@ -253,6 +254,7 @@ function ent:checkInput()
 	if control.throw and (love.timer.getMicroTime() - self.last_throw > shuriken_delay) then
 		ents:add( "shuriken", self.pos_x + 14, self.pos_y - 20, self.dir)
 		self.last_throw = love.timer.getMicroTime()
+		TEsound.play(self.sounds.throw)
 	end
 end
 
